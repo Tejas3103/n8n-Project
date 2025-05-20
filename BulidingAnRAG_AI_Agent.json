@@ -1,14 +1,11 @@
 {
-  "name": "BulidingAnRAG_AI_Agent",
+  "name": "BuildingAnRAG_AI_Agent",
   "nodes": [
     {
       "parameters": {},
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
-      "position": [
-        -340,
-        -160
-      ],
+      "position": [-340, -160],
       "id": "9d11d886-f181-4bdc-ab75-980e5c0ade22",
       "name": "When clicking ‘Test workflow’"
     },
@@ -18,22 +15,18 @@
         "fileId": {
           "__rl": true,
           "mode": "list",
-          "value": ""
+          "value": "<GOOGLE_DRIVE_FILE_ID>"
         },
         "options": {}
       },
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
-      "position": [
-        -120,
-        -160
-      ],
+      "position": [-120, -160],
       "id": "4b6ae5ef-6134-4f8f-aa6c-ba5641b71149",
       "name": "Google Drive",
       "credentials": {
         "googleDriveOAuth2Api": {
-          "id": "Ssw99bVkJOfpsd6N",
-          "name": "Google Drive account 2"
+          "name": "<YOUR_GOOGLE_DRIVE_CREDENTIAL_NAME>"
         }
       }
     },
@@ -42,26 +35,21 @@
         "mode": "insert",
         "pineconeIndex": {
           "__rl": true,
-          "value": "hadaudh",
-          "mode": "list",
-          "cachedResultName": "hadaudh"
+          "value": "<YOUR_PINECONE_INDEX_NAME>",
+          "mode": "list"
         },
         "options": {
-          "pineconeNamespace": "Nike"
+          "pineconeNamespace": "<YOUR_PINECONE_NAMESPACE>"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
       "typeVersion": 1.1,
-      "position": [
-        100,
-        -160
-      ],
+      "position": [100, -160],
       "id": "fb68ae98-df77-4abd-9c69-fe6fb6d9d1cc",
       "name": "Pinecone Vector Store",
       "credentials": {
         "pineconeApi": {
-          "id": "tBO6NQZ2NqiNxzrw",
-          "name": "PineconeApi account"
+          "name": "<YOUR_PINECONE_API_CREDENTIAL_NAME>"
         }
       }
     },
@@ -71,16 +59,12 @@
       },
       "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
       "typeVersion": 1.2,
-      "position": [
-        -100,
-        200
-      ],
+      "position": [-100, 200],
       "id": "cf3b55d5-7e04-4980-b292-fc696a0234e4",
       "name": "Embeddings OpenAI",
       "credentials": {
         "openAiApi": {
-          "id": "S0P1RDbcnAt2pEbc",
-          "name": "Demo"
+          "name": "<YOUR_OPENAI_CREDENTIAL_NAME>"
         }
       }
     },
@@ -91,10 +75,7 @@
       },
       "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
       "typeVersion": 1,
-      "position": [
-        280,
-        40
-      ],
+      "position": [280, 40],
       "id": "14df61b9-1cd6-40a7-8f39-2690aff20078",
       "name": "Default Data Loader"
     },
@@ -104,114 +85,31 @@
       },
       "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
       "typeVersion": 1,
-      "position": [
-        280,
-        240
-      ],
+      "position": [280, 240],
       "id": "829f4206-864b-421e-84da-7ee670cafcbc",
       "name": "Recursive Character Text Splitter"
     }
   ],
-  "pinData": {
-    "Google Drive": [
-      {
-        "json": {
-          "quarter": "Q3",
-          "fiscal_year": 2025,
-          "release_date": "March 20, 2025",
-          "revenue_reported_billion": 11.3,
-          "revenue_change_reported_pct": -9,
-          "revenue_change_currency_neutral_pct": -7,
-          "gross_margin_pct": 41.5,
-          "direct_revenue_billion": 4.7,
-          "wholesale_revenue_billion": 6.2,
-          "net_income_billion": 0.8,
-          "diluted_eps": 0.54
-        }
-      },
-      {
-        "json": {
-          "quarter": "Q2",
-          "fiscal_year": 2025,
-          "release_date": "December 19, 2024",
-          "revenue_reported_billion": 12.4,
-          "revenue_change_reported_pct": -8,
-          "revenue_change_currency_neutral_pct": -9,
-          "gross_margin_pct": 43.6,
-          "direct_revenue_billion": 5,
-          "wholesale_revenue_billion": 6.9,
-          "net_income_billion": null,
-          "diluted_eps": null
-        }
-      }
-    ]
-  },
   "connections": {
     "When clicking ‘Test workflow’": {
-      "main": [
-        [
-          {
-            "node": "Google Drive",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
+      "main": [[{ "node": "Google Drive", "type": "main", "index": 0 }]]
     },
     "Google Drive": {
-      "main": [
-        [
-          {
-            "node": "Pinecone Vector Store",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
+      "main": [[{ "node": "Pinecone Vector Store", "type": "main", "index": 0 }]]
     },
     "Embeddings OpenAI": {
-      "ai_embedding": [
-        [
-          {
-            "node": "Pinecone Vector Store",
-            "type": "ai_embedding",
-            "index": 0
-          }
-        ]
-      ]
+      "ai_embedding": [[{ "node": "Pinecone Vector Store", "type": "ai_embedding", "index": 0 }]]
     },
     "Default Data Loader": {
-      "ai_document": [
-        [
-          {
-            "node": "Pinecone Vector Store",
-            "type": "ai_document",
-            "index": 0
-          }
-        ]
-      ]
+      "ai_document": [[{ "node": "Pinecone Vector Store", "type": "ai_document", "index": 0 }]]
     },
     "Recursive Character Text Splitter": {
-      "ai_textSplitter": [
-        [
-          {
-            "node": "Default Data Loader",
-            "type": "ai_textSplitter",
-            "index": 0
-          }
-        ]
-      ]
+      "ai_textSplitter": [[{ "node": "Default Data Loader", "type": "ai_textSplitter", "index": 0 }]]
     }
   },
   "active": false,
-  "settings": {
-    "executionOrder": "v1"
-  },
+  "settings": { "executionOrder": "v1" },
   "versionId": "e085e47c-e87a-4bad-8e17-8280b5842cbd",
-  "meta": {
-    "templateCredsSetupCompleted": true,
-    "instanceId": "926f0350daaf7cb807b99556426d927a62929dee36d844c38f0de815adb26b23"
-  },
   "id": "wJZjcDYISwComCS1",
   "tags": []
 }
